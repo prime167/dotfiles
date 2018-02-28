@@ -1,0 +1,97 @@
+[user]
+    name = todo
+    email = todo@todo.com
+[core]
+    autocrlf = true
+    quotepath = false
+
+    # 全局忽略
+    excludesfile = C:\\Users\\todo\\.gitignore
+
+    # git commit 使用notpad++ 输入提交信息
+    editor = 'C:/Program Files (x86)/Notepad++/notepad++.exe' -multiInst -nosession -noPlugin
+
+#设置外部图形化差异、合并工具
+[diff]
+    tool = bc3
+[difftool]
+    prompt = false
+[difftool "bc3"]
+    cmd = \"C:/Program Files/Beyond Compare 4/BCompare.exe\" -expandall -solo \"$LOCAL\" \"$REMOTE\"
+[difftool "sourcetree"]
+	cmd = 'C:/Program Files/Beyond Compare 4/BComp.exe' \"$LOCAL\" \"$REMOTE\"
+[mergetool "sourcetree"]
+	cmd = 'C:/Program Files/Beyond Compare 4/BComp.exe' \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+	trustExitCode = true
+[merge]
+    tool = bc3
+[mergetool]
+    prompt = false
+    keepBackup = false
+[mergetool "bc3"]
+    cmd = \"c:/program files/beyond compare 4/BCompare.exe\" \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+    trustExitCode = true
+# 设置命令别名
+[alias]
+    # 工作目录和index比较  -d --dir-diff 比较文件夹,下同
+    dt = difftool -d
+
+    # index和HEAD比较
+    dtc = difftool -d --cached
+   
+    # 工作目录和HEAD比较
+    dth = difftool -d HEAD
+
+    mt = mergetool
+    st = status --short --branch
+    ci = commit
+    cia = commit -a
+    ciam = commit -am "update"
+    ce = commit --allow-empty
+    co = checkout
+    br = branch
+    ec = config --global -e
+
+    # 统计commit次数
+    cc = rev-list HEAD --count
+    sta = shortlog -s -n --all --no-merges
+    
+    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+    last = log -1
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+    # 将已修改文件暂时从修改列表里隐藏, git status 看不到
+    hide = !git update-index --assume-unchanged
+
+    # 取消隐藏
+    unhide = !git update-index --no-assume-unchanged
+
+    # 取消所有隐藏
+    unhide-all = !git update-index --really-refresh
+
+    # 列出目前隐藏的文件列表
+    hidden = !git ls-files -v | grep ^[a-z]
+
+    # 同步远程tag：先删除所有tag（包括远程的和本地未推送的），然后重新获取
+    synctags = !git tag -l | xargs git tag -d && git fetch -t
+
+    # 清理本地master之外的分支
+    cbr = "!git co master && git branch --list | grep -v "master" | xargs --no-run-if-empty git branch -D"
+
+    # 追加修改到上次提交,确保上次提交未推送
+    ciama=!git add . && git commit --amend --no-edit
+[gui]
+    encoding = utf-8
+    fontdiff = -family Consolas -size 12 -weight normal -slant roman -underline 0 -overstrike 0
+[push]
+    default = current
+[color]
+    ui = true
+[credential]
+    helper = manager
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
