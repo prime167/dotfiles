@@ -14,31 +14,41 @@
 #设置外部图形化差异、合并工具
 [diff]
     tool = bc3
+
 [difftool]
     prompt = false
+
 [difftool "bc3"]
-    cmd = \"C:/Program Files/Beyond Compare 4/BCompare.exe\" -expandall -solo \"$LOCAL\" \"$REMOTE\"
+    cmd = \"C:/Program Files/Beyond Compare 4/BComp.exe\" -expandall -solo \"$LOCAL\" \"$REMOTE\"
+
 [difftool "sourcetree"]
-	cmd = 'C:/Program Files/Beyond Compare 4/BComp.exe' \"$LOCAL\" \"$REMOTE\"
+    cmd = 'C:/Program Files/Beyond Compare 4/BComp.exe' \"$LOCAL\" \"$REMOTE\"
+
 [mergetool "sourcetree"]
-	cmd = 'C:/Program Files/Beyond Compare 4/BComp.exe' \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
-	trustExitCode = true
+    cmd = 'C:/Program Files/Beyond Compare 4/BComp.exe' \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+    trustExitCode = true
+
 [merge]
     tool = bc3
+
 [mergetool]
     prompt = false
     keepBackup = false
+
 [mergetool "bc3"]
-    cmd = \"c:/program files/beyond compare 4/BCompare.exe\" \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+    cmd = \"c:/program files/beyond compare 4/BComp.exe\" \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
     trustExitCode = true
+
 # 设置命令别名
 [alias]
+    a = add .
+    aa = add -A
     # 工作目录和index比较  -d --dir-diff 比较文件夹,下同
     dt = difftool -d
 
     # index和HEAD比较
     dtc = difftool -d --cached
-   
+
     # 工作目录和HEAD比较
     dth = difftool -d HEAD
 
@@ -47,7 +57,7 @@
     ci = commit
     cia = commit -a
     ciam = commit -am "update"
-    ce = commit --allow-empty
+    ciae = commit --allow-empty
     co = checkout
     br = branch
     ec = config --global -e
@@ -55,7 +65,7 @@
     # 统计commit次数
     cc = rev-list HEAD --count
     sta = shortlog -s -n --all --no-merges
-    
+
     ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
     last = log -1
     ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
@@ -81,15 +91,31 @@
 
     # 追加修改到上次提交,确保上次提交未推送
     ciama=!git add . && git commit --amend --no-edit
+    find = branch -a --contains
+    incoming = "!git remote update -p; git log ..@{u}"
+    outgoing = log @{u}..
+
+    # worktree
+    wta= worktree add
+    wtl=worktree list
+    wtp=worktree prune
+    
 [gui]
     encoding = utf-8
     fontdiff = -family Consolas -size 12 -weight normal -slant roman -underline 0 -overstrike 0
+
 [push]
     default = current
+
 [color]
     ui = true
+
 [credential]
     helper = manager
+
+[pull]
+    rebase = true
+
 [filter "lfs"]
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
