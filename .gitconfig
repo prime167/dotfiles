@@ -98,8 +98,9 @@
     # worktree
     wta= worktree add
     wtl=worktree list
+    wtm=worktree move
+    wtr=worktree remove
     wtp=worktree prune
-    
 [gui]
     encoding = utf-8
     fontdiff = -family Consolas -size 12 -weight normal -slant roman -underline 0 -overstrike 0
