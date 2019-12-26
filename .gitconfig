@@ -8,7 +8,7 @@
     commitGraph = true
     longpaths = true
 
-    # 全局忽略
+    # 全局忽略 
     excludesfile = C:\\Users\\your_username\\.gitignore
 
     # git commit 使用notpad++ 输入提交信息
