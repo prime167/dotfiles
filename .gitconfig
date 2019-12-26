@@ -4,12 +4,14 @@
 [core]
     autocrlf = true
     quotepath = false
-
+    safecrlf = false
+    commitGraph = true
+    longpaths = true
     # 全局忽略
-    excludesfile = C:\\Users\\todo\\.gitignore
+    excludesfile = C:\\Users\\your_username\\.gitignore
 
     # git commit 使用notpad++ 输入提交信息
-    editor = 'C:/Program Files (x86)/Notepad++/notepad++.exe' -multiInst -nosession -noPlugin
+    editor = 'C:/Program Files/Notepad++/notepad++.exe' -multiInst -nosession -noPlugin
 
 #设置外部图形化差异、合并工具
 [diff]
